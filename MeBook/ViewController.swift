@@ -100,32 +100,65 @@ class FeedCell: UICollectionViewCell {
         return imageView
     }()
     
+    let likesLabel: UILabel = {
+        let label = UILabel()
+        label.text = "480 Likes    10.7K Comments"
+        label.font = UIFont.systemFont(ofSize: 12)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        
+        return label
+    }()
+    
     func setupViews() {
         backgroundColor = .white
         
-        addSubview(nameLabel)
         addSubview(profileImageView)
+        addSubview(nameLabel)
         addSubview(statusTextView)
         addSubview(statusImageView)
+        addSubview(likesLabel)
         
-        nameLabel.centerYAnchor.constraint(equalTo: profileImageView.centerYAnchor).isActive = true
-        nameLabel.leftAnchor.constraint(equalTo: profileImageView.rightAnchor, constant: 8).isActive = true
+        // iOS9 Constraints
+        // x, y, width, height
         
+//        profileImageView.topAnchor.constraint(equalTo: topAnchor, constant: 8).isActive = true
+//        profileImageView.leftAnchor.constraint(equalTo: leftAnchor, constant: 8).isActive = true
+//        profileImageView.widthAnchor.constraint(equalToConstant: 44).isActive = true
+//        profileImageView.heightAnchor.constraint(equalToConstant: 44).isActive = true
         profileImageView.topAnchor.constraint(equalTo: topAnchor, constant: 8).isActive = true
         profileImageView.leftAnchor.constraint(equalTo: leftAnchor, constant: 8).isActive = true
         profileImageView.widthAnchor.constraint(equalToConstant: 44).isActive = true
         profileImageView.heightAnchor.constraint(equalToConstant: 44).isActive = true
         
+//        nameLabel.centerYAnchor.constraint(equalTo: profileImageView.centerYAnchor).isActive = true
+//        nameLabel.leftAnchor.constraint(equalTo: profileImageView.rightAnchor, constant: 8).isActive = true
+        nameLabel.leftAnchor.constraint(equalTo: profileImageView.rightAnchor, constant: 8).isActive = true
+        nameLabel.topAnchor.constraint(equalTo: topAnchor, constant: 12).isActive = true
+        
         // x, y, w, h
-        statusTextView.leftAnchor.constraint(equalTo: leftAnchor, constant: 4).isActive = true
+//        statusTextView.leftAnchor.constraint(equalTo: leftAnchor, constant: 4).isActive = true
+//        statusTextView.topAnchor.constraint(equalTo: profileImageView.bottomAnchor, constant: 4).isActive = true
+//        statusTextView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
+//        statusTextView.heightAnchor.constraint(equalToConstant: 30).isActive = true
         statusTextView.topAnchor.constraint(equalTo: profileImageView.bottomAnchor, constant: 4).isActive = true
-        statusTextView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
+        statusTextView.leftAnchor.constraint(equalTo: leftAnchor, constant: 4).isActive = true
+        statusTextView.rightAnchor.constraint(equalTo: rightAnchor, constant: -4).isActive = true
         statusTextView.heightAnchor.constraint(equalToConstant: 30).isActive = true
         
+//        statusImageView.topAnchor.constraint(equalTo: statusTextView.bottomAnchor, constant: 4).isActive = true
+//        statusImageView.bottomAnchor.constraint(equalTo: likesLabel.topAnchor, constant: 8).isActive = true
+//        statusImageView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
+        
         statusImageView.topAnchor.constraint(equalTo: statusTextView.bottomAnchor, constant: 4).isActive = true
-        statusImageView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-        statusImageView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
-        statusImageView.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        statusImageView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 1).isActive = true
+        
+//        likesLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 8).isActive = true
+//        likesLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 12).isActive = true
+//        likesLabel.heightAnchor.constraint(equalToConstant: 24).isActive = true
+        likesLabel.topAnchor.constraint(equalTo: statusImageView.bottomAnchor, constant: 8).isActive = true
+        likesLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8).isActive = true
+        likesLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 12).isActive = true
+        likesLabel.heightAnchor.constraint(equalToConstant: 24).isActive = true
     }
 }
 
