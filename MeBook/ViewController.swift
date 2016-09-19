@@ -31,7 +31,7 @@ class FeedController: UICollectionViewController, UICollectionViewDelegateFlowLa
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.width, height: 300)
+        return CGSize(width: view.frame.width, height: 400)
     }
 }
 
@@ -53,7 +53,7 @@ class FeedCell: UICollectionViewCell {
         
         let attributedText = NSMutableAttributedString(string: "Mark Zuckerberg", attributes: [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 14)])
         
-        attributedText.append(NSAttributedString(string: "\nDecember 18 • San Francisco • ", attributes: [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 12), NSForegroundColorAttributeName: UIColor(red: 155/255, green: 161/255, blue: 171/255, alpha: 1)]))
+        attributedText.append(NSAttributedString(string: "\nDecember 18 • San Francisco • ", attributes: [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 12), NSForegroundColorAttributeName: UIColor.rgb(red: 155, green: 161, blue: 171)]))
         
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = 4
@@ -104,9 +104,30 @@ class FeedCell: UICollectionViewCell {
         let label = UILabel()
         label.text = "480 Likes    10.7K Comments"
         label.font = UIFont.systemFont(ofSize: 12)
+        label.textColor = UIColor.rgb(red: 155, green: 161, blue: 171)
         label.translatesAutoresizingMaskIntoConstraints = false
         
         return label
+    }()
+    
+    let dividerLineView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.rgb(red: 226, green: 228, blue: 232)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        
+        return view
+    }()
+    
+    let likeButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Like", for: .normal)
+        button.setTitleColor(UIColor.rgb(red: 143, green: 150, blue: 163), for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setImage(UIImage(named: "like"), for: .normal)
+        button.titleEdgeInsets = UIEdgeInsetsMake(0, 8, 0, 0)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        
+        return button
     }()
     
     func setupViews() {
@@ -117,6 +138,8 @@ class FeedCell: UICollectionViewCell {
         addSubview(statusTextView)
         addSubview(statusImageView)
         addSubview(likesLabel)
+        addSubview(dividerLineView)
+        addSubview(likeButton)
         
         // iOS9 Constraints
         // x, y, width, height
@@ -156,13 +179,27 @@ class FeedCell: UICollectionViewCell {
 //        likesLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 12).isActive = true
 //        likesLabel.heightAnchor.constraint(equalToConstant: 24).isActive = true
         likesLabel.topAnchor.constraint(equalTo: statusImageView.bottomAnchor, constant: 8).isActive = true
-        likesLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8).isActive = true
+        likesLabel.bottomAnchor.constraint(equalTo: dividerLineView.topAnchor, constant: -8).isActive = true
         likesLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 12).isActive = true
         likesLabel.heightAnchor.constraint(equalToConstant: 24).isActive = true
+        
+        dividerLineView.leftAnchor.constraint(equalTo: leftAnchor, constant: 12).isActive = true
+        dividerLineView.rightAnchor.constraint(equalTo: rightAnchor, constant: -12).isActive = true
+        dividerLineView.heightAnchor.constraint(equalToConstant: 0.5).isActive = true
+        dividerLineView.bottomAnchor.constraint(equalTo: likeButton.topAnchor).isActive = true
+        
+        likeButton.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 1).isActive = true
+        likeButton.heightAnchor.constraint(equalToConstant: 44).isActive = true
+        likeButton.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
     }
 }
 
-
+extension UIColor {
+    
+    static func rgb(red: CGFloat, green: CGFloat, blue: CGFloat) -> UIColor {
+        return UIColor(red: red/255, green: green/255, blue: blue/255, alpha: 1)
+    }
+}
 
 
 
