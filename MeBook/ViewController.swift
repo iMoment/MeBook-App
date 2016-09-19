@@ -118,17 +118,21 @@ class FeedCell: UICollectionViewCell {
         return view
     }()
     
-    let likeButton: UIButton = {
+    let likeButton: UIButton = FeedCell.buttonForTitle(title: "Like", imageName: "like")
+    let commentButton: UIButton = FeedCell.buttonForTitle(title: "Comment", imageName: "comment")
+    let shareButton: UIButton = FeedCell.buttonForTitle(title: "Share", imageName: "share")
+    
+    static func buttonForTitle(title: String, imageName: String) -> UIButton {
         let button = UIButton()
-        button.setTitle("Like", for: .normal)
+        button.setTitle(title, for: .normal)
         button.setTitleColor(UIColor.rgb(red: 143, green: 150, blue: 163), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setImage(UIImage(named: "like"), for: .normal)
+        button.setImage(UIImage(named: imageName), for: .normal)
         button.titleEdgeInsets = UIEdgeInsetsMake(0, 8, 0, 0)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
         
         return button
-    }()
+    }
     
     func setupViews() {
         backgroundColor = .white
@@ -140,6 +144,8 @@ class FeedCell: UICollectionViewCell {
         addSubview(likesLabel)
         addSubview(dividerLineView)
         addSubview(likeButton)
+        addSubview(commentButton)
+        addSubview(shareButton)
         
         // iOS9 Constraints
         // x, y, width, height
@@ -188,9 +194,19 @@ class FeedCell: UICollectionViewCell {
         dividerLineView.heightAnchor.constraint(equalToConstant: 0.5).isActive = true
         dividerLineView.bottomAnchor.constraint(equalTo: likeButton.topAnchor).isActive = true
         
-        likeButton.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 1).isActive = true
+        likeButton.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 1/3).isActive = true
         likeButton.heightAnchor.constraint(equalToConstant: 44).isActive = true
         likeButton.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        
+        commentButton.leftAnchor.constraint(equalTo: likeButton.rightAnchor).isActive = true
+        commentButton.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 1/3).isActive = true
+        commentButton.heightAnchor.constraint(equalToConstant: 44).isActive = true
+        commentButton.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        
+        shareButton.leftAnchor.constraint(equalTo: commentButton.rightAnchor).isActive = true
+        shareButton.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 1/3).isActive = true
+        shareButton.heightAnchor.constraint(equalToConstant: 44).isActive = true
+        shareButton.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
     }
 }
 
