@@ -31,7 +31,7 @@ class FeedController: UICollectionViewController, UICollectionViewDelegateFlowLa
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.width, height: 60)
+        return CGSize(width: view.frame.width, height: 300)
     }
 }
 
@@ -73,9 +73,28 @@ class FeedCell: UICollectionViewCell {
     
     let profileImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "zuckprofile")
+        imageView.image = #imageLiteral(resourceName: "zuckprofile")
         imageView.contentMode = .scaleAspectFit
         imageView.backgroundColor = .red
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        
+        return imageView
+    }()
+    
+    let statusTextView: UITextView = {
+        let textView = UITextView()
+        textView.text = "Meanwhile, Beast turned to the dark side."
+        textView.font = UIFont.systemFont(ofSize: 14)
+        textView.translatesAutoresizingMaskIntoConstraints = false
+        
+        return textView
+    }()
+    
+    let statusImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = #imageLiteral(resourceName: "zuckdog")
+        imageView.contentMode = .scaleAspectFill
+        imageView.layer.masksToBounds = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
         
         return imageView
@@ -86,14 +105,27 @@ class FeedCell: UICollectionViewCell {
         
         addSubview(nameLabel)
         addSubview(profileImageView)
+        addSubview(statusTextView)
+        addSubview(statusImageView)
         
+        nameLabel.centerYAnchor.constraint(equalTo: profileImageView.centerYAnchor).isActive = true
         nameLabel.leftAnchor.constraint(equalTo: profileImageView.rightAnchor, constant: 8).isActive = true
-        nameLabel.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         
+        profileImageView.topAnchor.constraint(equalTo: topAnchor, constant: 8).isActive = true
         profileImageView.leftAnchor.constraint(equalTo: leftAnchor, constant: 8).isActive = true
-        profileImageView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         profileImageView.widthAnchor.constraint(equalToConstant: 44).isActive = true
         profileImageView.heightAnchor.constraint(equalToConstant: 44).isActive = true
+        
+        // x, y, w, h
+        statusTextView.leftAnchor.constraint(equalTo: leftAnchor, constant: 4).isActive = true
+        statusTextView.topAnchor.constraint(equalTo: profileImageView.bottomAnchor, constant: 4).isActive = true
+        statusTextView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
+        statusTextView.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        
+        statusImageView.topAnchor.constraint(equalTo: statusTextView.bottomAnchor, constant: 4).isActive = true
+        statusImageView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        statusImageView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
+        statusImageView.heightAnchor.constraint(equalToConstant: 100).isActive = true
     }
 }
 
