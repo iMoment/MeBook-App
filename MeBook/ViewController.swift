@@ -12,6 +12,7 @@ let cellId = "cellId"
 
 class Post {
     var name: String?
+    var statusText: String?
 }
 
 class FeedController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
@@ -23,9 +24,13 @@ class FeedController: UICollectionViewController, UICollectionViewDelegateFlowLa
         
         let postMark = Post()
         postMark.name = "Mark Zuckerberg"
+        postMark.statusText = "Meanwhile, Beast turned to the dark side."
         
         let postSteve = Post()
         postSteve.name = "Steve Jobs"
+        postSteve.statusText = "Design is not just what it looks like and feels like. Design is how it works. \n\n" +
+            "Being the richest man in the cemetery doesn't matter to me. Going to bed at night saying we've done something wonderful, that's what matters to me. \n\n" +
+            "Sometimes when you innovate, you make mistakes. It is best to admit them quickly, and get on with improving your other innovations."
         
         posts.append(postMark)
         posts.append(postSteve)
@@ -50,7 +55,14 @@ class FeedController: UICollectionViewController, UICollectionViewDelegateFlowLa
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.width, height: 400)
+        
+        if let statusText = posts[indexPath.item].statusText {
+            let rect = NSString(string: statusText).boundingRect(with: CGSize(width: view.frame.width, height: 1000), options: NSStringDrawingOptions.usesFontLeading.union(NSStringDrawingOptions.usesLineFragmentOrigin), attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 14)], context: nil)
+            
+            return CGSize(width: view.frame.width, height: rect.height + 368)
+        }
+        
+        return CGSize(width: view.frame.width, height: 500)
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -82,6 +94,10 @@ class FeedCell: UICollectionViewCell {
                 
                 nameLabel.attributedText = attributedText
                 nameLabel.translatesAutoresizingMaskIntoConstraints = false
+            }
+            
+            if let statusText = post?.statusText {
+                statusTextView.text = statusText
             }
         }
     }
@@ -116,6 +132,7 @@ class FeedCell: UICollectionViewCell {
     let statusTextView: UITextView = {
         let textView = UITextView()
         textView.text = "Meanwhile, Beast turned to the dark side."
+        textView.isScrollEnabled = false
         textView.font = UIFont.systemFont(ofSize: 14)
         textView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -192,10 +209,10 @@ class FeedCell: UICollectionViewCell {
         statusTextView.topAnchor.constraint(equalTo: profileImageView.bottomAnchor, constant: 4).isActive = true
         statusTextView.leftAnchor.constraint(equalTo: leftAnchor, constant: 4).isActive = true
         statusTextView.rightAnchor.constraint(equalTo: rightAnchor, constant: -4).isActive = true
-        statusTextView.heightAnchor.constraint(equalToConstant: 30).isActive = true
         
         statusImageView.topAnchor.constraint(equalTo: statusTextView.bottomAnchor, constant: 4).isActive = true
         statusImageView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 1).isActive = true
+        statusImageView.heightAnchor.constraint(equalToConstant: 200).isActive = true
         
         likesLabel.topAnchor.constraint(equalTo: statusImageView.bottomAnchor, constant: 8).isActive = true
         likesLabel.bottomAnchor.constraint(equalTo: dividerLineView.topAnchor, constant: -8).isActive = true
