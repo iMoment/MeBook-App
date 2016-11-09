@@ -12,7 +12,11 @@ let cellId = "cellId"
 
 class Post {
     var name: String?
+    var profileImageName: String?
     var statusText: String?
+    var statusImageName: String?
+    var numLikes: Int?
+    var numComments: Int?
 }
 
 class FeedController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
@@ -24,16 +28,36 @@ class FeedController: UICollectionViewController, UICollectionViewDelegateFlowLa
         
         let postMark = Post()
         postMark.name = "Mark Zuckerberg"
-        postMark.statusText = "Meanwhile, Beast turned to the dark side."
+        postMark.profileImageName = "zuckprofile"
+        postMark.statusText = "By giving people the power to share, we're making the world more transparent."
+        postMark.statusImageName = "zuckdog"
+        postMark.numLikes = 400
+        postMark.numComments = 123
+        
         
         let postSteve = Post()
         postSteve.name = "Steve Jobs"
+        postSteve.profileImageName = "steve_profile"
         postSteve.statusText = "Design is not just what it looks like and feels like. Design is how it works. \n\n" +
             "Being the richest man in the cemetery doesn't matter to me. Going to bed at night saying we've done something wonderful, that's what matters to me. \n\n" +
             "Sometimes when you innovate, you make mistakes. It is best to admit them quickly, and get on with improving your other innovations."
+        postSteve.statusImageName = "steve_status"
+        postSteve.numLikes = 1000
+        postSteve.numComments = 55
+        
+        let postGandhi = Post()
+        postGandhi.name = "Mahatma Gandhi"
+        postGandhi.profileImageName = "gandhi"
+        postGandhi.statusText = "Live as if you were to die tomorrow; learn as if you were to live forever. \n\n" +
+            "The weak can never forgive. Forgiveness is the attribute of the strong. \n" +
+            "Happiness is when what you think, what you say, and what you do are in harmony."
+        postGandhi.statusImageName = "gandhi_status"
+        postGandhi.numLikes = 333
+        postGandhi.numComments = 22
         
         posts.append(postMark)
         posts.append(postSteve)
+        posts.append(postGandhi)
         
         navigationItem.title = "Facebook Feed"
         
@@ -98,6 +122,14 @@ class FeedCell: UICollectionViewCell {
             
             if let statusText = post?.statusText {
                 statusTextView.text = statusText
+            }
+            
+            if let profileImageName = post?.profileImageName {
+                profileImageView.image = UIImage(named: profileImageName)
+            }
+            
+            if let statusImageName = post?.statusImageName {
+                statusImageView.image = UIImage(named: statusImageName)
             }
         }
     }
@@ -196,8 +228,7 @@ class FeedCell: UICollectionViewCell {
         addSubview(commentButton)
         addSubview(shareButton)
         
-        // iOS9 Constraints
-        // x, y, width, height
+        // iOS9 Constraints: x, y, width, height
         profileImageView.topAnchor.constraint(equalTo: topAnchor, constant: 8).isActive = true
         profileImageView.leftAnchor.constraint(equalTo: leftAnchor, constant: 8).isActive = true
         profileImageView.widthAnchor.constraint(equalToConstant: 44).isActive = true
