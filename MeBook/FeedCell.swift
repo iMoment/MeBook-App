@@ -8,31 +8,37 @@
 
 import UIKit
 
+var imageCache = NSCache<AnyObject, AnyObject>()
+
 class FeedCell: UICollectionViewCell {
     
     var post: Post? {
+        
         didSet {
-            
             statusImageView.image = nil
-//
-//            if let statusImageName = post?.statusImageName {
-//                statusImageView.image = UIImage(named: statusImageName)
-//            }
             
             if let statusImageUrl = post?.statusImageUrl {
-                URLSession.shared.dataTask(with: URL(string: statusImageUrl)!, completionHandler: { (data, response, error) in
+                
+                if let image = imageCache.object(forKey: statusImageUrl as AnyObject) as? UIImage {
+                    statusImageView.image = image
+                } else {
                     
-                    if error != nil {
-                        print(error)
-                        return
-                    }
-                    
-                    let image = UIImage(data: data!)
-                    DispatchQueue.main.async {
-                        self.statusImageView.image = image
-                    }
-                    
-                }).resume()
+                    URLSession.shared.dataTask(with: URL(string: statusImageUrl)!, completionHandler: { (data, response, error) in
+                        
+                        if error != nil {
+                            print(error)
+                            return
+                        }
+                        
+                        let image = UIImage(data: data!)
+                        imageCache.setObject(image!, forKey: statusImageUrl as AnyObject)
+                        
+                        DispatchQueue.main.async {
+                            self.statusImageView.image = image
+                        }
+                        
+                    }).resume()
+                }
             }
             setupFeedCell()
         }

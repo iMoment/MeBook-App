@@ -23,6 +23,10 @@ class FeedController: UICollectionViewController, UICollectionViewDelegateFlowLa
         collectionView?.register(FeedCell.self, forCellWithReuseIdentifier: cellId)
     }
     
+    override func didReceiveMemoryWarning() {
+        imageCache.removeAllObjects()
+    }
+    
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return posts.numberOfPosts()
     }
