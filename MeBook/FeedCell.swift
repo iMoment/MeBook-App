@@ -9,39 +9,47 @@
 import UIKit
 
 class FeedCell: UICollectionViewCell {
+    
     var post: Post? {
         didSet {
             
-            if let name = post?.name {
-                let attributedText = NSMutableAttributedString(string: name, attributes: [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 14)])
-                
-                attributedText.append(NSAttributedString(string: "\nDecember 18 • San Francisco • ", attributes: [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 12), NSForegroundColorAttributeName: UIColor.rgb(red: 155, green: 161, blue: 171)]))
-                
-                let paragraphStyle = NSMutableParagraphStyle()
-                paragraphStyle.lineSpacing = 4
-                
-                attributedText.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyle, range: NSMakeRange(0, attributedText.string.characters.count))
-                
-                let attachment = NSTextAttachment()
-                attachment.image = #imageLiteral(resourceName: "globe_small")
-                attachment.bounds = CGRect(x: 0, y: -2, width: 12, height: 12)
-                attributedText.append(NSAttributedString(attachment: attachment))
-                
-                nameLabel.attributedText = attributedText
-                nameLabel.translatesAutoresizingMaskIntoConstraints = false
-            }
+            statusImageView.image = nil
+//
+//            if let statusImageName = post?.statusImageName {
+//                statusImageView.image = UIImage(named: statusImageName)
+//            }
             
-            if let statusText = post?.statusText {
-                statusTextView.text = statusText
-            }
+            setupFeedCell()
+        }
+    }
+    
+    private func setupFeedCell() {
+        
+        if let name = post?.name {
+            let attributedText = NSMutableAttributedString(string: name, attributes: [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 14)])
             
-            if let profileImageName = post?.profileImageName {
-                profileImageView.image = UIImage(named: profileImageName)
-            }
+            attributedText.append(NSAttributedString(string: "\nDecember 18 • San Francisco • ", attributes: [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 12), NSForegroundColorAttributeName: UIColor.rgb(red: 155, green: 161, blue: 171)]))
             
-            if let statusImageName = post?.statusImageName {
-                statusImageView.image = UIImage(named: statusImageName)
-            }
+            let paragraphStyle = NSMutableParagraphStyle()
+            paragraphStyle.lineSpacing = 4
+            
+            attributedText.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyle, range: NSMakeRange(0, attributedText.string.characters.count))
+            
+            let attachment = NSTextAttachment()
+            attachment.image = #imageLiteral(resourceName: "globe_small")
+            attachment.bounds = CGRect(x: 0, y: -2, width: 12, height: 12)
+            attributedText.append(NSAttributedString(attachment: attachment))
+            
+            nameLabel.attributedText = attributedText
+            nameLabel.translatesAutoresizingMaskIntoConstraints = false
+        }
+        
+        if let statusText = post?.statusText {
+            statusTextView.text = statusText
+        }
+        
+        if let profileImageName = post?.profileImageName {
+            profileImageView.image = UIImage(named: profileImageName)
         }
     }
     
