@@ -23,6 +23,28 @@ class CustomTabBarController: UITabBarController {
         secondNavigationController.title = "Requests"
         secondNavigationController.tabBarItem.image = #imageLiteral(resourceName: "requests_icon")
         
-        viewControllers = [navigationController, secondNavigationController]
+        let messengerController = UIViewController()
+        messengerController.view.backgroundColor = .white
+        messengerController.navigationItem.title = "Messenger"
+        let thirdNavigationController = UINavigationController(rootViewController: messengerController)
+        thirdNavigationController.title = "Messenger"
+        thirdNavigationController.tabBarItem.image = #imageLiteral(resourceName: "messenger_icon")
+        
+        let notificationController = UIViewController()
+        notificationController.view.backgroundColor = .darkGray
+        notificationController.navigationItem.title = "Notifications"
+        let fourthNavigationController = UINavigationController(rootViewController: notificationController)
+        fourthNavigationController.title = "Notifications"
+        fourthNavigationController.tabBarItem.image = #imageLiteral(resourceName: "globe_icon")
+        
+        let profileController = UIViewController()
+        profileController.view.backgroundColor = .black
+        profileController.navigationItem.title = "Profile"
+        let fifthNavigationController = UINavigationController(rootViewController: profileController)
+        fifthNavigationController.title = "Profile"
+        fifthNavigationController.tabBarItem.image = #imageLiteral(resourceName: "more_icon")
+        
+        viewControllers = [navigationController, secondNavigationController, thirdNavigationController,
+                           fourthNavigationController, fifthNavigationController]
     }
 }
