@@ -12,6 +12,7 @@ class CustomTabBarController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tabBar.isTranslucent = false
         
         let feedController = FeedController(collectionViewLayout: UICollectionViewFlowLayout())
         let navigationController = UINavigationController(rootViewController: feedController)
@@ -46,5 +47,14 @@ class CustomTabBarController: UITabBarController {
         
         viewControllers = [navigationController, secondNavigationController, thirdNavigationController,
                            fourthNavigationController, fifthNavigationController]
+        
+        // Height of divider line for tab bar is actually 0.5 pixels tall
+        // TODO: Manually fix this
+        let topDividerLine = CALayer()
+        topDividerLine.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 0.5)
+        topDividerLine.backgroundColor = UIColor.rgb(red: 229, green: 231, blue: 235).cgColor
+        
+        tabBar.layer.addSublayer(topDividerLine)
+        tabBar.clipsToBounds = true
     }
 }
