@@ -15,6 +15,7 @@
 		91A1630D1D90356B00E4AE79 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 91A1630B1D90356B00E4AE79 /* LaunchScreen.storyboard */; };
 		91ECDE3E1DD4163B00F66171 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91ECDE3D1DD4163B00F66171 /* Post.swift */; };
 		91ECDE401DD4167500F66171 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91ECDE3F1DD4167500F66171 /* Extensions.swift */; };
+		91ECDE421DD42DFC00F66171 /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91ECDE411DD42DFC00F66171 /* CustomTabBarController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		91A1630E1D90356B00E4AE79 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		91ECDE3D1DD4163B00F66171 /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		91ECDE3F1DD4167500F66171 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		91ECDE411DD42DFC00F66171 /* CustomTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +95,7 @@
 			isa = PBXGroup;
 			children = (
 				91A163041D90356B00E4AE79 /* ViewController.swift */,
+				91ECDE411DD42DFC00F66171 /* CustomTabBarController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -171,6 +174,7 @@
 			files = (
 				91ECDE401DD4167500F66171 /* Extensions.swift in Sources */,
 				91A163051D90356B00E4AE79 /* ViewController.swift in Sources */,
+				91ECDE421DD42DFC00F66171 /* CustomTabBarController.swift in Sources */,
 				91A163031D90356B00E4AE79 /* AppDelegate.swift in Sources */,
 				912D81E81DD2FB790071B9AF /* FeedCell.swift in Sources */,
 				91ECDE3E1DD4163B00F66171 /* Post.swift in Sources */,
