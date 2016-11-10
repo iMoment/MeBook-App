@@ -19,6 +19,21 @@ class FeedCell: UICollectionViewCell {
 //                statusImageView.image = UIImage(named: statusImageName)
 //            }
             
+            if let statusImageUrl = post?.statusImageUrl {
+                URLSession.shared.dataTask(with: URL(string: statusImageUrl)!, completionHandler: { (data, response, error) in
+                    
+                    if error != nil {
+                        print(error)
+                        return
+                    }
+                    
+                    let image = UIImage(data: data!)
+                    DispatchQueue.main.async {
+                        self.statusImageView.image = image
+                    }
+                    
+                }).resume()
+            }
             setupFeedCell()
         }
     }
