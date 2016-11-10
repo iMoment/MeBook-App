@@ -10,15 +10,6 @@ import UIKit
 
 let cellId = "cellId"
 
-class Post {
-    var name: String?
-    var profileImageName: String?
-    var statusText: String?
-    var statusImageName: String?
-    var numLikes: Int?
-    var numComments: Int?
-}
-
 class FeedController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
     var posts = [Post]()
@@ -93,12 +84,5 @@ class FeedController: UICollectionViewController, UICollectionViewDelegateFlowLa
         super.viewWillTransition(to: size, with: coordinator)
         
         collectionView?.collectionViewLayout.invalidateLayout()
-    }
-}
-
-extension UIColor {
-    
-    static func rgb(red: CGFloat, green: CGFloat, blue: CGFloat) -> UIColor {
-        return UIColor(red: red/255, green: green/255, blue: blue/255, alpha: 1)
     }
 }
