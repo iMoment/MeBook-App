@@ -58,10 +58,23 @@ class FeedController: UICollectionViewController, UICollectionViewDelegateFlowLa
     }
     
     func animateImageView(statusImageView: UIImageView) {
-        let zoomImageView = UIView()
-        zoomImageView.backgroundColor = .red
-        zoomImageView.frame = statusImageView.frame
-        view.addSubview(zoomImageView)
+        if let startingFrame = statusImageView.superview?.convert(statusImageView.frame, to: nil) {
+            
+            let zoomImageView = UIImageView()
+            zoomImageView.backgroundColor = .red
+            zoomImageView.frame = startingFrame
+            zoomImageView.isUserInteractionEnabled = true
+            zoomImageView.image = statusImageView.image
+            zoomImageView.contentMode = .scaleAspectFill
+            zoomImageView.clipsToBounds = true
+            view.addSubview(zoomImageView)
+            
+            UIView.animate(withDuration: 0.75) { () -> Void in
+                let height = (self.view.frame.width / startingFrame.width) * startingFrame.height
+                let y = self.view.frame.height/2 - height/2
+                zoomImageView.frame = CGRect(x: 0, y: y, width: self.view.frame.width, height: height)
+            }
+        }
     }
 }
 
