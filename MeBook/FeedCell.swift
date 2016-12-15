@@ -12,6 +12,12 @@ var imageCache = NSCache<AnyObject, AnyObject>()
 
 class FeedCell: UICollectionViewCell {
     
+    var feedController: FeedController?
+    
+    func handleAnimate() {
+        feedController?.animateImageView(statusImageView: statusImageView)
+    }
+    
     var post: Post? {
         
         didSet {
@@ -117,6 +123,7 @@ class FeedCell: UICollectionViewCell {
         imageView.contentMode = .scaleAspectFill
         imageView.layer.masksToBounds = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.isUserInteractionEnabled = true
         
         return imageView
     }()
@@ -167,6 +174,8 @@ class FeedCell: UICollectionViewCell {
         addSubview(likeButton)
         addSubview(commentButton)
         addSubview(shareButton)
+        
+        statusImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleAnimate)))
         
         // iOS9 Constraints: x, y, width, height
         profileImageView.topAnchor.constraint(equalTo: topAnchor, constant: 8).isActive = true

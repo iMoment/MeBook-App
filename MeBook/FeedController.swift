@@ -35,6 +35,7 @@ class FeedController: UICollectionViewController, UICollectionViewDelegateFlowLa
         let feedCell =  collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! FeedCell
         
         feedCell.post = posts[indexPath]
+        feedCell.feedController = self
         
         return feedCell
     }
@@ -55,4 +56,30 @@ class FeedController: UICollectionViewController, UICollectionViewDelegateFlowLa
         
         collectionView?.collectionViewLayout.invalidateLayout()
     }
+    
+    func animateImageView(statusImageView: UIImageView) {
+        let zoomImageView = UIView()
+        zoomImageView.backgroundColor = .red
+        zoomImageView.frame = statusImageView.frame
+        view.addSubview(zoomImageView)
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
